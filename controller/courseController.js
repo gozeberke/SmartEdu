@@ -1,16 +1,34 @@
 const Course = require('../model/Course');
 
 exports.creatCourse = async (req, res) => {
-  const course = await Course.create(req.body);
+  
   try {
+    const course = await Course.create(req.body);
     res.status(201).json({
-      stetus: 'success',
+      status: 'success',
       course,
-    });
-  } catch {
+    }); 
+  } catch(error){
     res.status(400).json({
-      stetus: 'fail',
-      error,
+      status: 'fail',
+      error
     });
   }
 };
+
+
+exports.getAllCourse = async (req, res) => {
+  
+    try {
+      const courses = await Course.find();
+      res.status(200).render('courses',{
+          courses,
+          page_name:'courses'
+        })
+    } catch(error){
+      res.status(400).json({
+        status: 'fail',
+        error
+      });
+    }
+  };

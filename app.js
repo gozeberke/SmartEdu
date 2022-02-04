@@ -15,6 +15,8 @@ mongoose.connect('mongodb://localhost/smartedu-db')
 app.set("view engine","ejs")
 //Middlewares
 app.use(express.static("public"))
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 // Routes
 app.use('/',pageRoute);
 app.use('/courses',courseRoute)
